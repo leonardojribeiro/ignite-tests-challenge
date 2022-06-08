@@ -12,7 +12,6 @@ let authenticateUserUseCase: AuthenticateUserUseCase
 describe("Authenticate User", () => {
   beforeEach(() => {
     inMemoryUsersRepository = new InMemoryUsersRepository();
-
     createUserUseCase = new CreateUserUseCase(inMemoryUsersRepository);
     authenticateUserUseCase = new AuthenticateUserUseCase(inMemoryUsersRepository)
   });
@@ -23,14 +22,11 @@ describe("Authenticate User", () => {
       email: "user@gmail.com",
       password: "1234",
     };
-
     await createUserUseCase.execute(user);
-
     const result = await authenticateUserUseCase.execute({
       email: user.email,
       password: user.password,
     });
-
     expect(result).toHaveProperty("token");
   });
 
@@ -50,9 +46,7 @@ describe("Authenticate User", () => {
         email: "user@gmail.com",
         password: "1234",
       };
-
       await createUserUseCase.execute(user);
-
       await authenticateUserUseCase.execute({
         email: user.email,
         password: "12345",

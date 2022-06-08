@@ -13,20 +13,19 @@ describe("Show User", () => {
     createUserUseCase = new CreateUserUseCase(inMemoryUsersRepository);
     showUserProfileUseCase = new ShowUserProfileUseCase(inMemoryUsersRepository)
   });
+  
   it("should be able to show user by id", async () => {
     const user = {
       name: "Maria Silva",
       email: "mariasilva@email.com",
       password: "xcvbnm"
     }
-
     const userCreated = await createUserUseCase.execute({
       name: user.name,
       email: user.email,
       password: user.password
     });
     const userShow = await showUserProfileUseCase.execute(userCreated.id as string)
-
     expect(userShow).toHaveProperty("id")
   });
 
